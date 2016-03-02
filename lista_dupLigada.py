@@ -3,12 +3,45 @@ class ListaVaziaErro(Exception):
 
 
 class Noh():
-    pass
-
+    def __init__(self, valor, direito=None,esquerdo=None):
+        self.direito = direito
+        self.esquerdo = esquerdo
+        self.valor = valor
 
 class Lista():
-    pass
+    def __init__(self):
+        self.tam = 0
+        self.primeiro = None
+        self.ultimo = None
 
+    def adicionar_a_esquerda(self, valor):
+        #IMPLEMENTAR
+        pass
+    def remover(self,valor):
+        #IMPLEMENTAR
+        pass
+
+    def adicionar(self, valor):
+        noh = Noh(valor)
+        if self.tam == 0:
+            self.primeiro = noh
+        else:
+            ultimo = self.primeiro
+            while ultimo.direito is not None:
+                ultimo = ultimo.direito
+            ultimo.esquerdo = ultimo
+            ultimo.direito = noh
+            
+        self.tam += 1
+
+    def __len__(self):
+        return self.tam
+
+    def __iter__(self):
+        noh_atual = self.primeiro
+        while noh_atual is not None:
+            yield noh_atual.valor
+            noh_atual = noh_atual.direito
 
 import unittest
 
