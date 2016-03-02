@@ -14,13 +14,6 @@ class Lista():
         self.primeiro = None
         self.ultimo = None
 
-    def adicionar_a_esquerda(self, valor):
-        #IMPLEMENTAR
-        pass
-    def remover(self,valor):
-        #IMPLEMENTAR
-        pass
-
     def adicionar(self, valor):
         noh = Noh(valor)
         if self.tam == 0:
@@ -29,7 +22,7 @@ class Lista():
             ultimo = self.primeiro
             while ultimo.direito is not None:
                 ultimo = ultimo.direito
-            ultimo.esquerdo = ultimo
+            ultimo.esquerdo = ultimo#CORRIGIR
             ultimo.direito = noh
             
         self.tam += 1
@@ -42,6 +35,15 @@ class Lista():
         while noh_atual is not None:
             yield noh_atual.valor
             noh_atual = noh_atual.direito
+
+    def adicionar_a_esquerda(self, param):
+        #IMPLEMENTAR
+        pass
+
+    def remover(self):
+        #IMPLEMENTAR
+        pass
+
 
 import unittest
 
