@@ -18,13 +18,15 @@ class Lista():
         noh = Noh(valor)
         if self.tam == 0:
             self.primeiro = noh
+            self.ultimo = noh
         else:
             ultimo = self.primeiro
             while ultimo.direito is not None:
                 ultimo = ultimo.direito
-            ultimo.esquerdo = ultimo#CORRIGIR
+            noh.esquerdo=ultimo
             ultimo.direito = noh
-            
+            self.ultimo=noh
+
         self.tam += 1
 
     def __len__(self):
@@ -36,9 +38,20 @@ class Lista():
             yield noh_atual.valor
             noh_atual = noh_atual.direito
 
-    def adicionar_a_esquerda(self, param):
-        #IMPLEMENTAR
-        pass
+    def adicionar_a_esquerda(self, valor):
+        noh = Noh(valor)
+        if self.tam == 0:
+            self.primeiro = noh
+            self.ultimo = noh
+        else:
+            primeiro = self.ultimo
+            while primeiro.esquerdo is not None:
+                primeiro = primeiro.esquerdo
+            noh.direito=primeiro
+            primeiro.esquerdo = noh
+            self.primeiro=noh
+
+        self.tam += 1
 
     def remover(self):
         #IMPLEMENTAR
@@ -154,7 +167,19 @@ class ListaTestes(unittest.TestCase):
         self.assertIsNone(primeiro.esquerdo)
         self.assertIsNone(ultimo.direito)
 
-    def test_adicionar_terceiro(self):
+    def test_remover_lista_vazia(self):
+        lista = Lista()
+        self.assertRaises(ListaVaziaErro, lista.remover)
+
+    def test_remover_lista_1_elemento(self):
+        lista = Lista()
+        lista.adicionar(0)
+        self.assertEqual(0, lista.remover())
+        self.assertEqual(0, lista.tam)
+        self.assertIsNone(lista.primeiro)
+        self.assertIsNone(lista.ultimo)
+
+    def test_adicionar_terceiro_a_esquerda(self):
         lista = Lista()
         lista.adicionar_a_esquerda(0)
         lista.adicionar_a_esquerda(1)
@@ -174,18 +199,6 @@ class ListaTestes(unittest.TestCase):
 
         self.assertIsNone(primeiro.esquerdo)
         self.assertIsNone(ultimo.direito)
-
-    def test_remover_lista_vazia(self):
-        lista = Lista()
-        self.assertRaises(ListaVaziaErro, lista.remover)
-
-    def test_remover_lista_1_elemento(self):
-        lista = Lista()
-        lista.adicionar(0)
-        self.assertEqual(0, lista.remover())
-        self.assertEqual(0, lista.tam)
-        self.assertIsNone(lista.primeiro)
-        self.assertIsNone(lista.ultimo)
 
     def test_remover_lista_2_elementos(self):
         lista = Lista()
