@@ -54,8 +54,34 @@ class Lista():
         self.tam += 1
 
     def remover(self):
-        #IMPLEMENTAR
-        pass
+        if self.tam==0:
+            raise ListaVaziaErro()
+
+        ultimo=self.ultimo
+        if self.tam==1:
+            self.ultimo=None
+            self.primeiro=None
+        else:
+            penultimo=ultimo.esquerdo
+            penultimo.direito=None
+            self.ultimo=penultimo
+        self.tam-=1
+        return ultimo.valor
+
+    def remover_a_esquerda(self):
+        if self.tam==0:
+            raise ListaVaziaErro()
+
+        primeiro=self.primeiro
+        if self.tam==1:
+            self.ultimo=None
+            self.primeiro=None
+        else:
+            segundo=primeiro.direito
+            segundo.esquerdo=None
+            self.primeiro=segundo
+        self.tam-=1
+        return primeiro.valor
 
 
 import unittest
@@ -70,7 +96,7 @@ class NohTestes(unittest.TestCase):
 
     def test_init_com_no_esquerdo(self):
         esquerdo = Noh(1)
-        noh = Noh(2, esquerdo)
+        noh = Noh(2, esquerdo=esquerdo)#estava assim: noh = Noh(2, esquerdo)
         self.assertEqual(esquerdo, noh.esquerdo)
         self.assertIsNone(noh.direito)
         noh3 = Noh(3, esquerdo=esquerdo)
@@ -86,7 +112,7 @@ class NohTestes(unittest.TestCase):
     def test_init_com_no_esquerdo_e_direito(self):
         esquerdo = Noh(1)
         direito = Noh(2)
-        noh = Noh(3, esquerdo, direito)
+        noh = Noh(3, esquerdo=esquerdo, direito=direito)#estava assim: noh = Noh(3, esquerdo, direito)
         self.assertEqual(esquerdo, noh.esquerdo)
         self.assertEqual(direito, noh.direito)
 
