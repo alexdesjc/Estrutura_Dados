@@ -4,17 +4,30 @@ class ListaVaziaErro(Exception):
 
 class Noh():
     def __init__(self, valor, direito=None,esquerdo=None):
+        '''
+        :param valor: valor do nó
+        :param direito: No direito
+        :param esquerdo: Nó esquerdo
+        Cria um objeto Noh 
+        '''
         self.direito = direito
         self.esquerdo = esquerdo
         self.valor = valor
 
 class Lista():
     def __init__(self):
+        '''
+        Cria uma lista
+        '''
         self.tam = 0
         self.primeiro = None
         self.ultimo = None
 
     def adicionar(self, valor):
+        '''
+        :param valor: valor do Noh a ser adicionado
+        Adiciona um valor à lista
+        '''
         noh = Noh(valor)
         if self.tam == 0:
             self.primeiro = noh
@@ -30,15 +43,25 @@ class Lista():
         self.tam += 1
 
     def __len__(self):
+        '''
+        Retorna o tamanho da lista
+        '''
         return self.tam
 
     def __iter__(self):
+        '''
+        Percorre a lista
+        '''
         noh_atual = self.primeiro
         while noh_atual is not None:
             yield noh_atual.valor
             noh_atual = noh_atual.direito
 
     def adicionar_a_esquerda(self, valor):
+        '''
+        :param valor: valor do Noh a ser adicionado
+        Adiciona um valor à esquerda da lista
+        '''
         noh = Noh(valor)
         if self.tam == 0:
             self.primeiro = noh
@@ -54,6 +77,9 @@ class Lista():
         self.tam += 1
 
     def remover(self):
+        '''
+        Remove o último item da lista
+        '''
         if self.tam==0:
             raise ListaVaziaErro()
 
@@ -69,6 +95,9 @@ class Lista():
         return ultimo.valor
 
     def remover_a_esquerda(self):
+        '''
+        Remove o primeiro item da lista
+        '''
         if self.tam==0:
             raise ListaVaziaErro()
 
