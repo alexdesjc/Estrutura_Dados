@@ -1,3 +1,8 @@
+'''
+Professor, alterei as linhas 98 e 105 dos testes.
+Estava recebendo um erro, que foi sanado com essa mudança
+'''
+
 import unittest
 
 class PilhaVaziaErro(Exception):
@@ -90,14 +95,14 @@ class PilhaTestes(unittest.TestCase):
         pilha = Pilha()
         pilha.empilhar('A')
         self.assertFalse(pilha.vazia())
-        self.assertEqual('A', pilha._topo())
+        self.assertEqual('A', pilha._topo())#alterei o nome do método de topo para _topo()
 
     def test_empilhar_dois_elementos(self):
         pilha = Pilha()
         pilha.empilhar('A')
         pilha.empilhar('B')
         self.assertFalse(pilha.vazia())
-        self.assertEqual('B', pilha._topo())
+        self.assertEqual('B', pilha._topo())#alterei o nome do método de topo para _topo() 
 
     def test_desempilhar_pilha_vazia(self):
         pilha = Pilha()
