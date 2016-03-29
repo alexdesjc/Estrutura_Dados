@@ -10,6 +10,17 @@ está ordenado) é o(n) em tempo de execução e o(1) em memória
 >>[no meu código, especificamente, nos prints constam apenas 45
 loopings para n=10, porém quando n=20(teste_lista_desordenada_vinte)
 constam 190 loops. Como eu analiso essa complexidade?]
+
+No seu caso vc implementou uma melhoria em seu código. Vc sempre elimina o último elemento de sua nova lista. Então ele virá 
+(n-1)+(n-2)+(n-3)...1 = (n-1+1)*(n-1)/2=(n**2-n)/2. Veja que ele ainda é O(n**2) nesse caso. 
+O pior caso acontece quando o menor elemento mínimo é o ultimo elemento. Nos outros casos vc pode atingir o break antes e a fórmula não vai funcionar.
+Veja que no seu caso n=10 o 0 é minimo e ultimo. Exatamente (10**2-10)/2 dá exatamente os 45 que vc encontrou.
+Para n=20 vc tem o mesmo caso de 0 ser mínimo e último elemento. Portando (20**2-20)/2=380/2=190, justamente o valor impresso também.
+
+Perceba que quanto maior o n, menos relevante fica a parcela (-n). Para 10 ela apresentou-se 10%, para 20, pouco mais de 5%.
+Ou seja, quando N é bem grande, vc pode ignorar essa parcela
+
+Conseguiu entender?
 '''
 
 import unittest
