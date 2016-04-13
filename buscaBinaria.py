@@ -50,3 +50,9 @@ class BuscaBinariaTestes(unittest.TestCase):
         lista = [0, 0, 1, 1, 1, 2, 2, 2]
         self.assertEqual(2, busca_binaria(lista, 1))
         self.assertEqual(5, busca_binaria(lista, 2))
+    
+    def teste_lista_elementos_desordenados(self):# Teste com lista desordenada com alguns elementos repetidos
+        lista = [2, 11, 1, 10, 0, 2, 2, 1, 1, 1]
+        self.assertEqual(1, busca_binaria(lista, 1))
+        self.assertEqual(5, busca_binaria(lista, 2))
+        self.assertEqual(8, busca_binaria(lista, 5))
