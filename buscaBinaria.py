@@ -7,6 +7,7 @@ def busca_binaria(seq, procurado):
     :return: int
     Análise de Complexidade: O(n) em tempo e O(1) em espaço
     """
+    seq.sort()
     inicio=0
     fim=len(seq)-1
     while inicio<=fim:
