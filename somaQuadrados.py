@@ -13,30 +13,30 @@ def soma_quadrados(n):
     while len(q)>0:
         num=n
 
-        quadrado=q
-        a=quadrado.pop()
-        resp=[]
+        quadrado=q.copy()
+        aux=quadrado.pop()
+        vetor=[]
         while(num>0):
             if num in cache.keys() and num is not n:
-                resp= resp + cache[num]
+                vetor= vetor + cache[num]
                 num=0
             else:
                 if len(quadrado)>0:
-                    if num-a<0:
-                       a=quadrado.pop()
+                    if num-aux<0:
+                       aux=quadrado.pop()
                     else:
-                        num-=a
-                        resp.append(a)
+                        num-=aux
+                        vetor.append(aux)
                         if(num<quadrado[-1]):
-                            a=quadrado.pop()
+                            aux=quadrado.pop()
                 else:
-                    num-=a
-                    resp.append(a)
+                    num-=aux
+                    vetor.append(aux)
         if n not in cache.keys():
-            cache[n]=copy.copy(resp)
-        elif len(resp)<len(cache[n]):
-            cache[n]=copy.copy(resp)
-            q.pop()
+            cache[n]=copy.copy(vetor)
+        elif len(vetor)<len(cache[n]):
+            cache[n]=copy.copy(vetor)
+        q.pop()
 
     return cache[n]
 
@@ -71,6 +71,3 @@ class SomaQuadradosPerfeitosTestes(unittest.TestCase):
 
     def assert_possui_mesmo_elementos(self, esperado, resultado):
         self.assertEqual(Counter(esperado), Counter(resultado))
-
-if __name__ == '__main__':
-    unittest.main()
